@@ -1,0 +1,13 @@
+<div id="footer">
+	<div class="copyright fl"><a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备10236400号</a>    2013 Deluxe.net 版权所有</div>
+	<div id="nav">
+         {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+                <a {if $catid == ''}class="current"{/if} href="/">首页</a>
+               {loop $data $k $v}
+                   <a {if $catid == $v[catid] or $v[catid]==$CATEGORYS[$catid]['parentid'] or $v[catid]==$CATEGORYS[$top_parentid][catid]}class="current"{/if} href="{$v[url]}">{$v[catname]}</a>
+               {/loop}
+         {/pc}
+	</div>
+</div>
+</body>
+</html>

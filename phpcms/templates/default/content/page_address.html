@@ -1,0 +1,38 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+                {php if($CATEGORYS[$catid]['parentid']!=0){$catids =$CATEGORYS[$catid]['parentid'];}else{$catids = $catid;}}
+               {pc:content action="category" catid="$catids" num="25" siteid="$siteid" order="listorder ASC"}
+		         <ul>
+                         {loop $data $r}
+                                {php if(($CATEGORYS[$catid]['parentid']==0 and $n==1)or($CATEGORYS[$catid]['parentid'] !=0 and $catid==$r[catid])){$catids=$r[catid];}}
+                                <li><a href="{$r[url]}" {if ($CATEGORYS[$catid]['parentid'] !=0 and $catid==$r[catid]) or ($CATEGORYS[$catid]['parentid']==0 and $n==1) }class="current"{/if}>{$r[catname]}</a></li>
+                         {/loop}
+	                  </ul>
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+                  <div class="address mod_center">
+			<div class="mod_vertical">
+				<div class="mod_middle">
+                                       {if $catids==18}<div class="address_text">{/if}
+					{pc:get sql="SELECT * FROM lk_page where catid=$catids"}
+                                        {loop $data $key $val}
+                                               {$val[content]}
+                                        {/loop}
+                                        {/pc}
+                                         {if $catids==18}</div>{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}

@@ -1,0 +1,46 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+               {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+		         <ul>
+                         {loop $data $r}
+                                <li><a href="{$r[url]}" {if $catid==$r[catid]}class="current"{/if}>{$r[catname]}</a></li>
+                         {/loop}
+	                  </ul>
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+		{template "content","middle"}
+                 <div class="news">
+			<div class="sitemap">
+                                 {loop subcat(0) $v}
+                               {if $v[catid]!=$catid}
+                               <div class="sitemap_con">
+                                    <h4><a href="{$v[url]}"><b>[{$v[catname]}]</b></a></h4>
+                                     {if $v[child]!=0}
+                                     {loop subcat($v[catid]) $vs}
+                                            <a href="{$vs[url]}">{$vs[catname]}</a>
+                                             {if $vs[child]!=0}
+                                                 {loop subcat($vs[catid]) $vl}
+                                                      <a href="{$vl[url]}">{$vl[catname]}</a>
+                                                 {/loop}
+                                             {/if}
+                                      {/loop}
+                                      {/if}
+                               </div>
+                               {/if}
+                            {/loop}
+		            
+               
+		        </div>
+                </div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}

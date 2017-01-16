@@ -1,0 +1,58 @@
+{template "content","header"}
+<script type="text/javascript" src="{JS_PATH}jquery.min.js"></script>
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+               {pc:content action="category" catid="$CATEGORYS[$top_parentid][catid]" num="25" siteid="$siteid" order="listorder ASC"}
+                          {php $ij=0;}
+                         {loop $data $r}
+		         <ul>
+                                {if $ij==0}
+				       <li class="big_size">bigSize</li>
+                                {else}
+                                      <li class="small_size">smallSize</li>
+                                 {/if}
+                                 {pc:content action="category" catid="$r[catid]" num="25" siteid="$siteid" order="listorder ASC"}
+                                 {loop $data $v}
+                                         <li><a href="{$v[url]}" {if $catid==$v[catid]}class="current"{/if}><span class="exceed">{$v[catname]}</span></a></li>
+                                 {/loop}
+                                 {/pc}
+                           {php $ij++;}
+	                  </ul>
+                          {/loop}
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+          <div class="pro">     
+                 <div class="content">
+				<div class="big_pro"><img src=" {if $thumb ==''}{$lk_thumb[0][url]}{else}{$thumb}{/if}" alt=" "></div>
+				<div class="small_pro">
+					<ul>      
+                                             {if $thumb !=''}<li><img src=" {$thumb}" alt=" "></li>{/if}{loop $lk_thumb $s}<li><img src=" {$s[url]}" alt=""></li>{/loop}
+                                       </ul>
+				</div>
+				<div class="details_pro">
+					<h3>{$title}</h3>             
+                                        {$content}
+                                         <a class="buy" href="http://provence-fashion.taobao.com/" target="_blank">立即购买</a> 
+                                 </div>
+			</div>
+           </div>
+	</div>
+					
+	<!--主内容 结束 -->
+</div>
+<script type="text/javascript">
+$(function(){
+    $(".small_pro li").live("click",function(){
+          $(".big_pro img").attr("src",$(this).find("img").attr("src"));
+    });
+});
+</script>
+{template "content","footer"}

@@ -1,0 +1,30 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+               {pc:content action="category" catid="$CATEGORYS[$catid]['parentid']" num="25" siteid="$siteid" order="listorder ASC"}
+		         <ul>
+                         {loop $data $r}
+                                <li><a href="{$r[url]}" {if $r[catid]==$catid}class="current"{/if}>{$r[catname]}</a></li>
+                         {/loop}
+	                  </ul>
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+                 <div class="news">
+                         <h4>{$CATEGORYS[$catid]['catname']}</h4>
+			<div class="content">
+				            <h2>{$title}</h2>
+				            <p>{if $thumb}<img class="fr" src="{$thumb}" width="192" height="234" alt=" ">{/if}{strip_tags($content)}</p>
+			</div>
+		</div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}

@@ -1,0 +1,26 @@
+<?php defined('IN_PHPCMS') or exit('No permission resources.'); ?><?php include template("content","header"); ?>
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="about_menu menu">
+			<p>普罗旺斯炫彩</p>
+			<p>轻奢华皮具品牌</p>
+			<p>纯原版皮制作</p>
+			<p>轻奢潮尚</p>
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+		<?php include template("content","middle"); ?>
+                 <div class="about">
+                 <h4>公司简介</h4>
+		<div class="content">
+		        <?php echo $content;?>
+		</div>
+                </div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+<?php include template("content","footer"); ?>

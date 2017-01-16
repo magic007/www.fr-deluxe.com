@@ -1,0 +1,51 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+
+		<div class="menu">
+               {php $ij = 0;}
+               {pc:content action="category" catid="$catid" num="25" siteid="$siteid" order="listorder ASC"}
+                         {loop $data $r}
+		         <ul>
+                                 {if $ij==0}
+				 <li class="big_size">bigSize</li>
+                                  {else}
+                                 <li class="small_size">smallSize</li>
+                                  {/if}
+                                 {pc:content action="category" catid="$r[catid]" num="25" siteid="$siteid" order="listorder ASC"}
+                                 {loop $data $v}
+                                         {php if($ij==0){$catids= $v[catid];}}
+                                         <li><a href="{$v[url]}" {if $ij==0}class="current"{/if}><span class="exceed">{$v[catname]}</span></a></li>
+                                          {php $ij++;}
+                                 {/loop}
+                                 {/pc}
+	                  </ul>
+                                
+                          {/loop}
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+                 <div class="pro">
+                         <div class="content">
+                                           {pc:content action="lists" catid="$catids" num="4" order="listorder ASC" moreinfo="1"}
+                                            <ul class="list_pro">                                 
+                                            {loop $data $v}
+                                            {if $v[thumb] !='' or $v[lk_thumb]!=''}
+                                            {php eval("\$arr=" . $v[lk_thumb] . ";");}
+                                                  <li><a href="{$v[url]}"><img src=" {if $v[thumb] ==''}{$arr[0][url]}{else}{$v[thumb]}{/if}" alt=""></a></li>
+                                             {/if}
+                                             {/loop}
+                                             </ul>
+                                             {/pc}
+                         </div>
+		</div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}

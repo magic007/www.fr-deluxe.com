@@ -1,0 +1,36 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+               {pc:content action="category" catid="$CATEGORYS[$catid]['parentid']" num="25" siteid="$siteid" order="listorder ASC"}
+		         <ul>
+                         {loop $data $r}
+                                <li><a href="{$r[url]}" {if $r[catid]==$catid}class="current"{/if}>{$r[catname]}</a></li>
+                         {/loop}
+	                  </ul>
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+                 <div class="meet">
+			<div class="content">
+                              {pc:content action="lists" catid="$catid" num="25" order="listorder ASC" moreinfo="1"}
+                                {loop $data $k $v}
+				<p>{$v[title]}</p>
+                                 {php eval("\$arr=" . $v[lk_thumb] . ";");}
+				<div class="meet_mall">
+                                       {loop $arr $r}<img src="{$r[url]} " title="" />{/loop}                   
+                               </div>
+                                {/loop}
+                              {/pc}
+			</div>
+		</div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}

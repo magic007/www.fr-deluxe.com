@@ -1,0 +1,36 @@
+{template "content","header"}
+<div id="container">
+	<!--侧边 开始 -->
+	<div id="aside">
+		<a id="logo" href="/"><h1>路凯Deluxe</h1></a>
+		<div class="menu">
+               {pc:content action="category" catid="$catid" num="25" siteid="$siteid" order="listorder ASC"}
+		         <ul>
+                         {loop $data $r}
+                                 {php if($n==1){$catids=$r[catid];}}
+                                <li><a href="{$r[url]}" {if $n==1}class="current"{/if}>{$r[catname]}</a></li>
+                         {/loop}
+	                  </ul>
+                 {/pc}
+		</div>
+	</div>
+	<!--侧边 结束 -->
+	<!--主内容 开始 -->
+	<div id="main">
+         {template "content","middle"}
+                 <div class="news">
+                        <h4>{$CATEGORYS[$catids][catname]}</h4>
+			<div class="content">
+				{pc:content action="lists" catid="$catids" num="20" order="listorder ASC"}
+                                 {loop $data $k $v}
+				            <ul class="news_list">
+					               <li><span>{date('Y-m-d H:i:s',$v['inputtime'])}</span><a href="{$v['url']}">{$v[title]}</a></li>
+				             </ul>
+                                  {/loop}
+                                 {/pc}
+			</div>
+		</div>
+	</div>
+	<!--主内容 结束 -->
+</div>
+{template "content","footer"}
